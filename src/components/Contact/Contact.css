@@ -1,0 +1,16 @@
+/* Contact page styles */
+.contact-container {
+    text-align: center;
+    padding: 50px 0;
+  }
+  
+  .contact-container h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .contact-container p {
+    font-size: 1.2rem;
+    margin-top: 20px;
+  }
+  

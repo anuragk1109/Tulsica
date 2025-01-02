@@ -1,0 +1,20 @@
+/* Services page styles */
+.services-container {
+    text-align: center;
+    padding: 50px 0;
+  }
+  
+  .services-container h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .services-container p {
+    font-size: 1.2rem;
+    margin-top: 20px;
+  }
+  
+  button {
+    margin-top: 20px;
+  }
+  
