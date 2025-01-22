@@ -1,49 +1,69 @@
 import React, { useState } from "react";
-import "./Register.css";
+import { useNavigate } from "react-router-dom";
+
 const Register = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const [error, setError] = useState("");
+  const navigate = useNavigate(); // Replaces useHistory
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Registered with Name: ${name}, Email: ${email}`);
+
+    // Simulate user registration logic
+    if (formData.name && formData.email && formData.password) {
+      localStorage.setItem("studentData", JSON.stringify(formData));
+      setError("");
+      navigate("/login"); // Redirect to login after successful registration
+    } else {
+      setError("All fields are required!");
+    }
   };
 
   return (
-    <div>
+    <div className="register-container">
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Name:
+        <div className="form-group">
+          <label>Name</label>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
             required
           />
-        </label>
-        <br />
-        <label>
-          Email:
+        </div>
+        <div className="form-group">
+          <label>Email</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
             required
           />
-        </label>
-        <br />
-        <label>
-          Password:
+        </div>
+        <div className="form-group">
+          <label>Password</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
             required
           />
-        </label>
-        <br />
+        </div>
+        {error && <p className="error">{error}</p>}
         <button type="submit">Register</button>
       </form>
     </div>

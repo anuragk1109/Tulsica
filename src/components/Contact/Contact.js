@@ -1,12 +1,15 @@
 import React from "react";
-import "./Contact.css";
 
 const Contact = () => {
   return (
-    <div>
+    <div className="contact-container">
       <h1>Contact Us</h1>
-      <p>Email: support@studentportal.com</p>
-      <p>Phone: +123-456-7890</p>
+      <p>If you have any questions, feel free to reach out to us!</p>
+      <div className="contact-details">
+        <p><strong>Email:</strong> Tulsica@gmail.com</p>
+        <p><strong>Phone:</strong> +91-9876543210</p>
+        <p><strong>Address:</strong> Shree SitaRam Vivah Bhavan,Agarpur,Lalganj,Vaishali.</p>
+      </div>
     </div>
   );
 };

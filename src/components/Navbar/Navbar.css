@@ -1,49 +1,91 @@
-/* Navbar.css */
+/* Navbar container */
 .navbar {
-    background-color: #333;
-    padding: 1rem;
-  }
-  
-  .navbar ul {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Adjust to your color scheme */
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+/* Navigation Links */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #f1f1f1;
+}
+
+/* Right section - Project Title */
+.nav-right {
+  margin-left: auto;  /* Push title to the right */
+}
+
+.project-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Logout button styling */
+.logout-btn {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #ff1a1a;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
     align-items: center;
-    margin: 0;
-    padding: 0;
+    text-align: center;
   }
-  
-  .navbar ul li {
-    list-style-type: none;
-    margin: 0 20px;
+
+  .nav-left {
+    flex-direction: column;
   }
-  
-  .navbar ul li a {
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
   }
-  
-  .navbar ul li a:hover {
-    background-color: #007bff;
+
+  .nav-right {
+    margin-top: 10px;
   }
-  
-  /* Adding a responsive design for smaller screens */
-  @media (max-width: 768px) {
-    .navbar ul {
-      flex-direction: column;
-    }
-  
-    .navbar ul li {
-      margin: 10px 0;
-    }
-  
-    .navbar ul li a {
-      font-size: 1.5rem;
-      padding: 12px 20px;
-    }
+
+  .project-title {
+    font-size: 20px;
   }
-  
+}

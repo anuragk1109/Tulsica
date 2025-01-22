@@ -1,38 +1,58 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const navigate = useNavigate(); // Replace useHistory with useNavigate
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Logged in with Email: ${email}`);
+    const storedData = JSON.parse(localStorage.getItem("studentData"));
+
+    if (
+      storedData &&
+      storedData.email === formData.email &&
+      storedData.password === formData.password
+    ) {
+      setError("");
+      localStorage.setItem("isAuthenticated", true);
+      navigate("/upload-documents"); // Navigate to upload documents page
+    } else {
+      setError("Invalid email or password");
+    }
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Email:
+        <div className="form-group">
+          <label>Email</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
             required
           />
-        </label>
-        <br />
-        <label>
-          Password:
+        </div>
+        <div className="form-group">
+          <label>Password</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
             required
           />
-        </label>
-        <br />
+        </div>
+        {error && <p className="error">{error}</p>}
         <button type="submit">Login</button>
       </form>
     </div>

@@ -1,77 +1,33 @@
-// components/UploadDocuments/UploadDocuments.js
 import React, { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 import "./UploadDocuments.css";
 
 const UploadDocuments = () => {
-  // State to store uploaded files
-  const [documents, setDocuments] = useState({
-    aadhar: null,
-    pan: null,
-    passport: null,
-  });
+  const { isAuthenticated } = useAuth();
+  const [files, setFiles] = useState([]);
 
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    setDocuments({
-      ...documents,
-      [name]: files[0],
-    });
-  };
+  if (!isAuthenticated) {
+    return <h2>Please log in to upload documents.</h2>;
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Uploaded Documents:", documents);
-
-    // Perform any backend API call to upload the documents
-    alert("Documents uploaded successfully!");
+  const handleFileUpload = (e) => {
+    const uploadedFiles = Array.from(e.target.files);
+    setFiles([...files, ...uploadedFiles]);
+    alert("Files uploaded successfully!");
   };
 
   return (
-    <div className="upload-documents-container">
-      <h1>Upload Documents</h1>
-      <form onSubmit={handleSubmit} className="upload-form">
-        <div className="form-group">
-          <label htmlFor="aadhar">Upload Aadhar Card:</label>
-          <input
-            type="file"
-            id="aadhar"
-            name="aadhar"
-            accept=".jpeg, .jpg, .png, .pdf"
-            onChange={handleFileChange}
-          />
-          {documents.aadhar && <p>{documents.aadhar.name}</p>}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="pan">Upload PAN Card:</label>
-          <input
-            type="file"
-            id="pan"
-            name="pan"
-            accept=".jpeg, .jpg, .png, .pdf"
-            onChange={handleFileChange}
-          />
-          {documents.pan && <p>{documents.pan.name}</p>}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="passport">Upload Passport:</label>
-          <input
-            type="file"
-            id="passport"
-            name="passport"
-            accept=".jpeg, .jpg, .png, .pdf"
-            onChange={handleFileChange}
-          />
-          {documents.passport && <p>{documents.passport.name}</p>}
-        </div>
-
-        <button type="submit" className="upload-button">
-          Submit
-        </button>
-      </form>
+    <div className="upload-container">
+      <h1>Upload Your Documents</h1>
+      <input type="file" multiple onChange={handleFileUpload} />
+      <ul>
+        {files.map((file, idx) => (
+          <li key={idx}>{file.name}</li>
+        ))}
+      </ul>
     </div>
   );
 };
 
 export default UploadDocuments;
+
